@@ -1,0 +1,10 @@
+{
+  "description": "Deploy & manage your own Web4 profile in a few clicks",
+  "image": {
+    "ipfs_cid": "bafkreig5gs2e26lpyj544xxxzexf5auq275xkfaymz4vjghpxvnpc6upem"
+  },
+  "name": "Web4 Profile Generator",
+  "linktree": {
+    "website": "github.com/nearuaguild"
+  }
+}
