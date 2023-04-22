@@ -74,24 +74,55 @@ const onCreateClick = () => {
     });
   }
 
+  const links = [];
+
+  if (state.twitter) {
+    links.push({
+      type: 1,
+      text: "Twitter",
+      path: state.twitter,
+    });
+  }
+
+  if (state.telegram) {
+    links.push({
+      type: 2,
+      text: "Telegram",
+      path: state.telegram,
+    });
+  }
+
+  if (state.medium) {
+    links.push({
+      type: 0,
+      text: "Medium",
+      path: state.medium,
+    });
+  }
+
+  if (state.github) {
+    links.push({
+      type: 3,
+      text: "GitHub",
+      path: state.github,
+    });
+  }
+
   const data = {
     title: state.title,
     description: state.description,
-    twitter: state.twitter,
-    telegram: state.telegram,
-    github: state.github,
-    medium: state.medium,
+    links: links,
   };
 
   Near.call(
     props.factoryContractId,
     "create_web4_little_link_page",
     {
-      args: { data: data },
+      page_data: data,
       pub_key: fullAccessKey.public_key,
     },
     Big(10).pow(12).mul(300), // 300TGas
-    Big(10).pow(24).mul(2) // 2N
+    Big(10).pow(24).mul(1) // 1N
   );
 };
 

@@ -6,7 +6,7 @@ if (!context.accountId) {
 }
 
 const rpcUrl = "https://rpc.testnet.near.org";
-const factoryContractId = "web4_profile.testnet";
+const factoryContractId = "v2.web4_profile.testnet";
 
 const profileContractId =
   Near.view(factoryContractId, "get_registered_contract_by_creator", {

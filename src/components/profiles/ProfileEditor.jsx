@@ -3,13 +3,23 @@
 
 const profileContractId = props.profileContractId;
 
+const findLinkByType = (type) => {
+  if (!props.links) return;
+
+  const link = props.links.find((link) => link.type === type);
+
+  if (!link) return;
+
+  return link.path;
+};
+
 State.init({
   title: props.title ?? "",
   description: props.description ?? "",
-  twitter: props.twitter ?? "",
-  telegram: props.telegram ?? "",
-  github: props.github ?? "",
-  medium: props.medium ?? "",
+  twitter: findLinkByType(1) ?? "",
+  telegram: findLinkByType(2) ?? "",
+  github: findLinkByType(3) ?? "",
+  medium: findLinkByType(0) ?? "",
   error: "",
 });
 
@@ -34,18 +44,49 @@ const onEditClick = () => {
     return State.update({ error: "Description can't be empty" });
   }
 
+  const links = [];
+
+  if (state.twitter) {
+    links.push({
+      type: 1,
+      text: "Twitter",
+      path: state.twitter,
+    });
+  }
+
+  if (state.telegram) {
+    links.push({
+      type: 2,
+      text: "Telegram",
+      path: state.telegram,
+    });
+  }
+
+  if (state.medium) {
+    links.push({
+      type: 0,
+      text: "Medium",
+      path: state.medium,
+    });
+  }
+
+  if (state.github) {
+    links.push({
+      type: 3,
+      text: "GitHub",
+      path: state.github,
+    });
+  }
+
   const data = {
     title: state.title,
     description: state.description,
-    twitter: state.twitter,
-    telegram: state.telegram,
-    github: state.github,
-    medium: state.medium,
+    links: links,
   };
 
   Near.call(
     profileContractId,
-    "update_data",
+    "set_data",
     {
       data: data,
     },
