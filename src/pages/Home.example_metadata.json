@@ -6,5 +6,8 @@
   "name": "Web4 Profile Generator",
   "linktree": {
     "website": "github.com/nearuaguild"
+  },
+  "tags": {
+    "app": ""
   }
 }
